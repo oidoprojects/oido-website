@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Oído Projects — Stainless Steel Fabrication</title>
+<meta name="description" content="Custom stainless steel fabrication for hospitality spaces across Southern California."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#ebebea;
+  --dark:#1c1c1c;
+  --dark2:#242424;
+  --mid:#888;
+  --light:#bbb;
+  --rule:#d4d3d0;
+  --white:#fff;
+  --font-display:'Barlow Condensed',sans-serif;
+  --font-body:'Barlow',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--dark);font-family:var(--font-body);font-weight:300;overflow-x:hidden;}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--light);}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:background .3s,padding .3s,border-color .3s;
+  border-bottom:1px solid transparent;
+  background:rgba(28,28,28,0.0);
+}
+nav.scrolled{
+  background:rgba(28,28,28,0.97);
+  backdrop-filter:blur(8px);
+  padding:14px 48px;
+  border-bottom:1px solid var(--dark2);
+}
+.nav-logo{text-decoration:none;display:flex;align-items:center;}
+.nav-logo svg{height:44px;width:auto;display:block;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{
+  font-family:var(--font-display);
+  font-weight:400;font-size:11px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:#fff;}
+.nav-cta{
+  border:1px solid rgba(255,255,255,0.3) !important;
+  color:rgba(255,255,255,0.85) !important;
+  padding:6px 18px;
+}
+.nav-cta:hover{background:rgba(255,255,255,0.08) !important;color:#fff !important;}
+
+/* HERO */
+#hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:var(--dark);
+}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 60%;}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,rgba(28,28,28,0.78) 0%,rgba(28,28,28,0.25) 65%,rgba(28,28,28,0.08) 100%);
+}
+.hero-top-shade{
+  position:absolute;top:0;left:0;right:0;height:160px;z-index:1;
+  background:linear-gradient(to bottom,rgba(28,28,28,0.65) 0%,transparent 100%);
+}
+.hero-body{
+  position:relative;z-index:2;
+  padding:0 48px 60px;
+}
+.hero-eyebrow{
+  font-family:var(--font-display);
+  font-size:13px;font-weight:400;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  margin-bottom:16px;
+  opacity:0;animation:fadeUp .6s ease .2s forwards;
+}
+.hero-title{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(52px,8.5vw,118px);
+  line-height:.88;letter-spacing:-0.02em;text-transform:uppercase;
+  color:#fff;
+  opacity:0;animation:fadeUp .6s ease .3s forwards;
+}
+.hero-title .thin{font-weight:300;color:rgba(255,255,255,0.4);}
+.hero-sub-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;margin-top:36px;align-items:end;
+  opacity:0;animation:fadeUp .6s ease .5s forwards;
+}
+.hero-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.8;max-width:420px;}
+.hero-cta{
+  font-family:var(--font-display);font-size:11px;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:#fff;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+  padding-bottom:3px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:gap .3s,border-color .3s;
+}
+.hero-cta:hover{gap:14px;border-color:rgba(255,255,255,0.65);}
+.hero-scroll{
+  position:absolute;bottom:24px;right:48px;z-index:2;
+  font-family:var(--font-display);font-size:9px;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(255,255,255,0.18);writing-mode:vertical-rl;
+  opacity:0;animation:fadeIn .8s ease 1s forwards;
+}
+
+/* TICKER */
+.ticker-wrap{
+  background:var(--dark);overflow:hidden;
+  white-space:nowrap;padding:11px 0;
+  border-top:1px solid var(--dark2);
+  border-bottom:1px solid var(--dark2);
+}
+.ticker-inner{display:inline-flex;animation:ticker 28s linear infinite;}
+.ticker-item{
+  font-family:var(--font-display);font-size:10px;font-weight:400;
+  letter-spacing:0.22em;text-transform:uppercase;
+  padding:0 36px;color:#3a3a3a;
+}
+.ticker-item b{color:#555;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* SERVICES */
+#services{border-top:1px solid var(--rule);}
+.services-wrap{padding:80px 48px 72px;}
+.services-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;margin-bottom:56px;align-items:end;
+}
+.sec-label{
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--light);margin-bottom:14px;
+}
+.sec-title{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(38px,5vw,68px);
+  line-height:.9;letter-spacing:-0.02em;text-transform:uppercase;
+}
+.services-desc{font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;max-width:300px;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);}
+.svc{
+  background:var(--bg);padding:44px 32px 40px;
+  transition:background .3s;
+}
+.svc:hover{background:var(--dark);color:#fff;}
+.svc:hover .svc-num,.svc:hover .svc-body{color:rgba(255,255,255,0.4);}
+.svc-num{
+  font-family:var(--font-display);font-size:10px;font-weight:700;
+  letter-spacing:0.25em;color:var(--light);
+  margin-bottom:20px;display:block;transition:color .3s;
+}
+.svc-name{
+  font-family:var(--font-display);font-weight:900;font-size:22px;
+  text-transform:uppercase;letter-spacing:0.01em;
+  margin-bottom:14px;transition:color .3s;
+}
+.svc-body{font-size:13px;font-weight:300;color:var(--mid);line-height:1.7;transition:color .3s;}
+
+/* WORK */
+#work{border-top:1px solid var(--rule);}
+.work-top{padding:80px 48px 48px;display:grid;grid-template-columns:1fr auto;align-items:end;}
+.work-count{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(80px,12vw,148px);
+  color:var(--rule);line-height:1;letter-spacing:-0.03em;
+  padding-right:4px;
+}
+.work-subline{font-size:13px;font-weight:300;color:var(--light);margin-top:10px;letter-spacing:0.04em;}
+
+/* Project list rows */
+.proj-row{
+  display:grid;
+  grid-template-columns:48px 1fr 160px 56px;
+  align-items:center;
+  border-top:1px solid var(--rule);
+  padding:22px 48px;
+  position:relative;cursor:pointer;
+  transition:background .2s;
+}
+.proj-row:hover{background:rgba(0,0,0,0.025);}
+.proj-num{
+  font-family:var(--font-display);font-size:10px;font-weight:400;
+  letter-spacing:0.15em;color:var(--light);
+}
+.proj-name{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(26px,3.2vw,42px);
+  text-transform:uppercase;letter-spacing:-0.01em;line-height:1;
+  transition:color .2s;
+}
+.proj-cat{font-size:12px;font-weight:300;color:var(--mid);text-align:right;}
+.proj-yr{font-family:var(--font-display);font-size:10px;letter-spacing:0.1em;color:var(--light);text-align:right;}
+.proj-hover-img{
+  position:absolute;right:48px;top:50%;
+  transform:translateY(-50%);
+  width:200px;height:120px;
+  overflow:hidden;opacity:0;
+  transition:opacity .22s;
+  pointer-events:none;z-index:10;
+  background:var(--dark);
+}
+.proj-hover-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(8%);}
+.proj-row:hover .proj-hover-img{opacity:1;}
+
+/* DJ Booth featured split */
+.proj-featured{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  cursor:pointer;
+}
+.proj-featured-img{
+  height:300px;overflow:hidden;
+  position:relative;
+}
+.proj-featured-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s ease;
+  filter:grayscale(8%);
+}
+.proj-featured:hover .proj-featured-img img{transform:scale(1.04);}
+.proj-featured-info{
+  padding:48px 48px;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  background:var(--bg);
+  border-left:1px solid var(--rule);
+  transition:background .3s;
+}
+.proj-featured:hover .proj-featured-info{background:rgba(0,0,0,0.015);}
+.proj-featured-num{
+  font-family:var(--font-display);font-size:10px;
+  letter-spacing:0.25em;color:var(--light);
+  text-transform:uppercase;margin-bottom:16px;
+}
+.proj-featured-name{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(44px,5.5vw,72px);
+  text-transform:uppercase;letter-spacing:-0.02em;line-height:.9;
+  margin-bottom:16px;
+}
+.proj-featured-meta{font-size:13px;font-weight:300;color:var(--mid);}
+.proj-featured-cta{
+  font-family:var(--font-display);font-size:10px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--dark);border-bottom:1px solid var(--rule);
+  padding-bottom:2px;display:inline-block;margin-top:28px;
+  transition:border-color .2s;
+}
+.proj-featured:hover .proj-featured-cta{border-color:var(--dark);}
+
+/* DARK BAND */
+.dark-band{
+  background:var(--dark);color:#fff;
+  padding:72px 48px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+}
+.band-stat{padding:0 40px;border-right:1px solid var(--dark2);}
+.band-stat:first-child{padding-left:0;}
+.band-stat:last-child{border-right:none;}
+.band-num{
+  font-family:var(--font-display);font-weight:900;
+  font-size:56px;line-height:1;margin-bottom:8px;
+  letter-spacing:-0.01em;
+}
+.band-label{font-size:12px;font-weight:300;color:#555;letter-spacing:0.08em;text-transform:uppercase;}
+
+/* ALUST */
+#alust{background:var(--dark);color:#fff;overflow:hidden;border-top:1px solid var(--dark2);}
+.alust-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding:80px 48px 56px;
+}
+.alust-left{}
+.alust-eyebrow{
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:#444;margin-bottom:16px;
+}
+.alust-right{
+  display:flex;flex-direction:column;
+  align-items:flex-end;gap:24px;
+  max-width:400px;text-align:right;
+}
+.alust-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.8;}
+.alust-cta{
+  font-family:var(--font-display);font-size:10px;font-weight:700;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--dark);background:#fff;
+  text-decoration:none;padding:12px 28px;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:background .3s,gap .3s;
+}
+.alust-cta:hover{background:var(--mid);color:#fff;gap:16px;}
+.alust-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;width:100%;}
+.alust-panel{height:480px;overflow:hidden;position:relative;}
+.alust-panel img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(15%);
+  transition:transform .6s ease,filter .4s ease;
+}
+.alust-panel:hover img{transform:scale(1.05);filter:grayscale(0%);}
+
+/* ABOUT */
+#about{border-top:1px solid var(--rule);}
+.about-wrap{padding:88px 48px;}
+.about-inner{display:grid;grid-template-columns:5fr 4fr;gap:88px;}
+.about-title{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(40px,5vw,68px);
+  line-height:.9;text-transform:uppercase;letter-spacing:-0.02em;
+  margin-bottom:36px;
+}
+.about-body{font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:18px;}
+.about-quote{margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);}
+.about-quote p{
+  font-family:var(--font-display);font-weight:700;font-size:14px;
+  text-transform:uppercase;letter-spacing:0.08em;color:#444;
+}
+.about-right{padding-top:56px;}
+.spec-row{
+  display:flex;justify-content:space-between;
+  align-items:baseline;padding:16px 0;
+  border-bottom:1px solid var(--rule);
+}
+.spec-label{
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;color:var(--light);
+}
+.spec-val{
+  font-family:var(--font-display);font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:0.06em;color:#333;
+}
+
+/* CONTACT */
+#contact{background:var(--dark);color:#fff;padding:112px 48px;border-top:1px solid var(--dark2);}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start;}
+.contact-big{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(52px,7.5vw,104px);
+  line-height:.88;text-transform:uppercase;letter-spacing:-0.02em;
+}
+.contact-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.8;margin-top:28px;max-width:340px;}
+.contact-detail{
+  margin-top:36px;font-family:var(--font-display);
+  font-size:11px;font-weight:500;letter-spacing:0.15em;
+  text-transform:uppercase;color:#444;
+}
+.contact-detail a{color:#fff;text-decoration:none;transition:color .2s;}
+.contact-detail a:hover{color:var(--light);}
+.contact-form{display:flex;flex-direction:column;gap:2px;padding-top:8px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.f{
+  background:rgba(255,255,255,0.04);
+  border:none;border-bottom:1px solid rgba(255,255,255,0.1);
+  padding:18px 20px;color:#fff;
+  font-family:var(--font-body);font-size:13px;font-weight:300;
+  outline:none;width:100%;
+  transition:background .2s,border-color .2s;
+}
+.f::placeholder{color:rgba(255,255,255,0.22);}
+.f:focus{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.3);}
+select.f option{background:var(--dark);}
+textarea.f{resize:none;height:130px;}
+.f-submit{
+  background:#fff;color:var(--dark);border:none;
+  padding:18px 40px;font-family:var(--font-display);
+  font-size:11px;font-weight:700;letter-spacing:0.22em;
+  text-transform:uppercase;cursor:pointer;
+  transition:background .2s,color .2s;
+}
+.f-submit:hover{background:var(--mid);color:#fff;}
+
+/* FOOTER */
+footer{
+  background:var(--dark);
+  padding:24px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--dark2);
+}
+.foot-logo svg{height:28px;width:auto;display:block;}
+.foot-copy{font-size:11px;font-weight:300;color:#555;}
+.foot-links{display:flex;gap:24px;}
+.foot-links a{
+  font-family:var(--font-display);font-size:10px;font-weight:400;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:#666;text-decoration:none;transition:color .2s;
+}
+.foot-links a:hover{color:#fff;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:16px 20px;}
+  nav.scrolled{padding:12px 20px;}
+  .nav-links{display:none;}
+  .hero-body{padding:0 20px 44px;}
+  .hero-sub-row{grid-template-columns:1fr;gap:20px;}
+  .hero-scroll{display:none;}
+  .services-wrap{padding:64px 20px;}
+  .services-header{grid-template-columns:1fr;gap:24px;}
+  .services-grid{grid-template-columns:1fr;}
+  .work-top{padding:64px 20px 40px;grid-template-columns:1fr;}
+  .work-count{font-size:80px;text-align:left;}
+  .proj-row{grid-template-columns:36px 1fr;padding:18px 20px;}
+  .proj-cat,.proj-yr{display:none;}
+  .proj-hover-img{display:none;}
+  .proj-featured{grid-template-columns:1fr;}
+  .proj-featured-img{height:220px;}
+  .proj-featured-info{padding:32px 20px;}
+  .dark-band{grid-template-columns:1fr;padding:56px 20px;gap:32px;}
+  .band-stat{padding:0;border-right:none;border-bottom:1px solid var(--dark2);padding-bottom:28px;}
+  .alust-header{flex-direction:column;align-items:flex-start;gap:28px;padding:56px 20px 40px;}
+  .alust-right{align-items:flex-start;text-align:left;}
+  .alust-strip{grid-template-columns:repeat(2,1fr);}
+  .alust-panel{height:220px;}
+  .about-wrap{padding:64px 20px;}
+  .about-inner{grid-template-columns:1fr;gap:48px;}
+  .about-right{padding-top:0;}
+  #contact{padding:80px 20px;}
+  .contact-inner{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:20px;}
+}
+
+/* LIGHTBOX */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(10,10,10,0.96);z-index:9000;display:none;align-items:center;justify-content:center;flex-direction:column;}
+.lightbox-overlay.open{display:flex;}
+.lightbox-main{position:relative;max-width:90vw;max-height:80vh;display:flex;align-items:center;gap:16px;}
+.lightbox-img{max-width:82vw;max-height:78vh;object-fit:contain;display:block;}
+.lightbox-close{position:fixed;top:24px;right:32px;font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--light);background:none;border:none;cursor:pointer;transition:color .2s;}
+.lightbox-close:hover{color:#fff;}
+.lightbox-prev,.lightbox-next{background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;width:44px;height:52px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:background .2s;flex-shrink:0;}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.1);}
+.lightbox-counter{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--light);}
+.lightbox-caption{position:fixed;bottom:48px;left:50%;transform:translateX(-50%);font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<svg style="display:none">
+  <symbol id="oido-logo" viewBox="0 0 696.2 240.5">
+    <g><path d="M98.42,240.5c-27.18,0-49.7-9.26-67.57-27.78C13.02,194.21,4.09,171.37,4.09,144.2v-47.9c0-27.17,8.93-50.01,26.76-68.53C48.72,9.26,71.24,0,98.42,0c27.49,0,50.17,9.26,68.04,27.77c17.83,18.52,26.87,41.36,26.87,68.53v47.9c0,27.17-9.04,50.01-26.87,68.52C148.59,231.24,125.91,240.5,98.42,240.5z M98.42,26.61c-19.64,0-35.79,6.7-48.43,20.43C37.38,60.78,30.7,77.27,30.7,96.3v47.9c0,19.03,6.68,35.53,19.29,49.26c12.64,13.73,28.79,20.43,48.43,20.43c19.96,0,36.27-6.7,48.9-20.43c12.6-13.73,18.96-30.23,18.96-49.26V96.3c0-19.03-6.36-35.53-18.96-49.26C134.69,33.31,118.38,26.61,98.42,26.61z"/><path d="M98.42,171.88c-7.63,0-14.02-2.74-19.17-8.22c-5.15-5.48-7.73-12.2-7.73-20.17V96.3c0-7.97,2.58-14.69,7.73-20.17c5.15-5.48,11.54-8.22,19.17-8.22c7.94,0,14.49,2.74,19.64,8.22c5.15,5.48,7.73,12.2,7.73,20.17v47.19c0,7.97-2.58,14.69-7.73,20.17C112.91,169.14,106.36,171.88,98.42,171.88z"/><path d="M231.68,236.89V3.61h26.61v233.28H231.68z"/><path d="M340.85,236.89V3.61H432c25.65,0,46.93,8.89,63.87,26.67c16.9,17.78,25.35,40.31,25.35,67.57v44.8c0,27.27-8.45,49.79-25.35,67.57c-16.94,17.78-38.22,26.67-63.87,26.67H340.85z M367.46,210.28H432c18.38,0,33.56-6.54,45.5-19.61c11.91-13.07,17.87-29.61,17.87-49.61V97.85c0-20-5.96-36.54-17.87-49.61C465.56,35.17,450.38,28.61,432,28.61h-64.54V210.28z"/><path d="M588.51,240.5c-7.97,0-14.69-2.74-20.17-8.22c-5.48-5.48-8.22-12.2-8.22-20.17c0-7.63,2.74-14.02,8.22-19.17c5.48-5.15,12.2-7.73,20.17-7.73c7.63,0,13.86,2.58,18.68,7.73c4.82,5.15,7.24,11.54,7.24,19.17c0,7.97-2.42,14.69-7.24,20.17C602.37,237.76,596.14,240.5,588.51,240.5z"/><path d="M641.29,240.5c-7.97,0-14.69-2.74-20.17-8.22c-5.48-5.48-8.22-12.2-8.22-20.17c0-7.63,2.74-14.02,8.22-19.17c5.48-5.15,12.2-7.73,20.17-7.73c7.63,0,13.86,2.58,18.68,7.73c4.82,5.15,7.24,11.54,7.24,19.17c0,7.97-2.42,14.69-7.24,20.17C655.15,237.76,648.92,240.5,641.29,240.5z"/><path d="M588.51,171.06c-7.97,0-14.69-2.74-20.17-8.22c-5.48-5.48-8.22-12.2-8.22-20.17c0-7.63,2.74-14.02,8.22-19.17c5.48-5.15,12.2-7.73,20.17-7.73c7.63,0,13.86,2.58,18.68,7.73c4.82,5.15,7.24,11.54,7.24,19.17c0,7.97-2.42,14.69-7.24,20.17C602.37,168.32,596.14,171.06,588.51,171.06z"/></g>
+  </symbol>
+</svg>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <svg viewBox="0 0 696.2 240.5" aria-label="Oído Projects"><use href="#oido-logo" fill="#ffffff"/></svg>
+  </a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="https://qrco.de/bgUBbI" target="_blank">Portfolio</a>
+    <a href="https://alustforms.com" target="_blank">Alust</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg">
+    <img src="Captura%20de%20pantalla%202026-01-27%20125810.png" alt="Oído Projects — Center Console, Japanese Restaurant"/>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-top-shade"></div>
+  <div class="hero-scroll">Scroll</div>
+  <div class="hero-body">
+    <p class="hero-eyebrow">Stainless Steel Fabrication Studio — Southern California</p>
+    <h1 class="hero-title">STAINLESS <span class="thin">BUILT FOR</span><br>HOSPITALITY.</h1>
+    <div class="hero-sub-row">
+      <p class="hero-sub">Custom stainless steel fabrication for restaurants, bars, and hotels across Southern California — from statement front-of-house objects to precision back-of-house systems.</p>
+      <div><a href="#work" class="hero-cta">See our work →</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item"><b>304 Stainless Steel</b> · Brushed · Mirror · Matte</span>
+    <span class="ticker-item"><b>Front of House</b> · Bar Counters · Statement Pieces · Hostess Stands</span>
+    <span class="ticker-item"><b>Back of House</b> · Kitchen Systems · Prep Surfaces · Washing Stations</span>
+    <span class="ticker-item"><b>Alust Studio</b> · Sculptural Fabrication · Custom Objects</span>
+    <span class="ticker-item"><b>304 Stainless Steel</b> · Brushed · Mirror · Matte</span>
+    <span class="ticker-item"><b>Front of House</b> · Bar Counters · Statement Pieces · Hostess Stands</span>
+    <span class="ticker-item"><b>Back of House</b> · Kitchen Systems · Prep Surfaces · Washing Stations</span>
+    <span class="ticker-item"><b>Alust Studio</b> · Sculptural Fabrication · Custom Objects</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="services-wrap">
+    <div class="services-header reveal">
+      <div>
+        <p class="sec-label">What we build</p>
+        <h2 class="sec-title">PRECISION IN<br>EVERY SURFACE.</h2>
+      </div>
+      <p class="services-desc">We work closely with architects, operators, and designers — from first sketch to final installation. Every piece is custom. Nothing predefined.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc reveal"><span class="svc-num">01</span><h3 class="svc-name">Front of House</h3><p class="svc-body">Bar counters, hostess stands, and statement pieces. Objects that define the room before a guest sits down.</p></div>
+      <div class="svc reveal"><span class="svc-num">02</span><h3 class="svc-name">Back of House</h3><p class="svc-body">Kitchen systems, prep surfaces, and washing stations built for the demands of real service environments.</p></div>
+      <div class="svc reveal"><span class="svc-num">03</span><h3 class="svc-name">Bespoke</h3><p class="svc-body">One-off commissions and architectural elements at the intersection of fabrication and design.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="work-top reveal">
+    <div>
+      <p class="sec-label">Selected work</p>
+      <h2 class="sec-title">RECENT<br>PROJECTS.</h2>
+      <p class="work-subline">Same standard.</p>
+    </div>
+    <div class="work-count">05</div>
+  </div>
+
+  <div class="proj-row reveal" onclick="openLightbox('p01',0)">
+    <span class="proj-num">01</span>
+    <span class="proj-name">Center Console</span>
+    <span class="proj-cat">Front of House</span>
+    <span class="proj-yr">2025</span>
+    <div class="proj-hover-img"><img src="Captura%20de%20pantalla%202026-01-27%20125810.png" alt="Center Console" style="object-position:center 60%;"/></div>
+  </div>
+
+  <div class="proj-row reveal" onclick="openLightbox('p02',0)">
+    <span class="proj-num">02</span>
+    <span class="proj-name">Bar Service Unit</span>
+    <span class="proj-cat">Front of House</span>
+    <span class="proj-yr">2026</span>
+    <div class="proj-hover-img"><img src="OK%20be973b4f-c41a-476b-a7c2-f8ba6f3f5261.JPG" alt="Bar Service Unit"/></div>
+  </div>
+
+  <div class="proj-row reveal" onclick="openLightbox('p03',0)">
+    <span class="proj-num">03</span>
+    <span class="proj-name">Back of House System</span>
+    <span class="proj-cat">Back of House</span>
+    <span class="proj-yr">2024</span>
+    <div class="proj-hover-img"><img src="project03_fixed_v3.jpg" alt="Back of House System"/></div>
+  </div>
+
+  <div class="proj-row reveal" onclick="openLightbox('p04',0)">
+    <span class="proj-num">04</span>
+    <span class="proj-name">Bar Cabinet</span>
+    <span class="proj-cat">Front of House</span>
+    <span class="proj-yr">2025</span>
+    <div class="proj-hover-img"><img src="d7596f43-7c55-48c9-b402-19e9f6f79ce2.png" alt="Bar Cabinet" style="object-position:center 55%;"/></div>
+  </div>
+
+  <div class="proj-featured reveal" onclick="openLightbox('p05',0)">
+    <div class="proj-featured-img">
+      <img src="BUENA%20IMG_5515.jpeg" alt="DJ Booth"/>
+    </div>
+    <div class="proj-featured-info">
+      <span class="proj-featured-num">05 — Bespoke</span>
+      <h3 class="proj-featured-name">DJ<br>Booth</h3>
+      <p class="proj-featured-meta">Wine Bar · 2026 · 304 Brushed SS</p>
+      <span class="proj-featured-cta">View project →</span>
+    </div>
+  </div>
+</section>
+
+<div class="dark-band reveal">
+  <div class="band-stat"><div class="band-num">304/430</div><div class="band-label">Stainless Steel</div></div>
+  <div class="band-stat"><div class="band-num">25+</div><div class="band-label">Hospitality Projects</div></div>
+  <div class="band-stat"><div class="band-num">100%</div><div class="band-label">Custom — Never Predefined</div></div>
+</div>
+
+<section id="alust">
+  <div class="alust-header reveal">
+    <div class="alust-left">
+      <p class="alust-eyebrow">Design Studio</p>
+      <img src="logo_alust.png" alt="Alust" style="height:96px;width:auto;display:block;"/>
+    </div>
+    <div class="alust-right">
+      <p class="alust-desc">Alust is our in-house design studio — sculptural furniture and objects created to be owned, not commissioned. Our own designs, available for purchase. Metal, stone, wood. Each piece made with intention.</p>
+      <a href="https://alustforms.com" target="_blank" class="alust-cta">Visit Alust →</a>
+    </div>
+  </div>
+  <div class="alust-strip">
+    <div class="alust-panel"><img src="IMG_8910.jpg" alt="Alust — Coffee table"/></div>
+    <div class="alust-panel"><img src="Captura%20de%20pantalla%202026-03-07%20111255.png" alt="Alust — Console"/></div>
+    <div class="alust-panel"><img src="DSC07944-Edit.jpg" alt="Alust — Cabinet"/></div>
+    <div class="alust-panel"><img src="IMG_8816.jpg" alt="Alust — Side table"/></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-inner">
+      <div class="reveal">
+        <h2 class="about-title">WE MAKE<br>THINGS<br>THAT STAY.</h2>
+        <p class="about-body">Oído Projects is a stainless steel and aluminum fabrication studio serving the hospitality industry in Southern California. We design and manufacture custom pieces — from front-of-house statement objects to full back-of-house kitchen systems.</p>
+        <p class="about-body">We operate at the intersection of industrial craft and architectural design. Every project begins with a conversation and ends with something built to outlast the space it lives in.</p>
+        <p class="about-body">The name Oído is the Spanish word for ear. In professional kitchens, when a chef calls an order, cooks respond — Oído. Heard. Understood. On it.</p>
+        <div class="about-quote"><p>"Always custom. Never predefined."</p></div>
+      </div>
+      <div class="about-right reveal">
+        <div class="spec-row"><span class="spec-label">Primary Material</span><span class="spec-val">304 / 430 Stainless</span></div>
+        <div class="spec-row"><span class="spec-label">Market</span><span class="spec-val">Hospitality · SoCal</span></div>
+        <div class="spec-row"><span class="spec-label">Process</span><span class="spec-val">Design + Fabrication</span></div>
+        <div class="spec-row"><span class="spec-label">Lead Time</span><span class="spec-val">Project Dependent</span></div>
+        <div class="spec-row" style="border-bottom:none;"><span class="spec-label">Design Studio</span><span class="spec-val">Alust — Our Own Designs</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-big">LET'S BUILD<br>SOMETHING.</h2>
+      <p class="contact-sub">We work with architects, designers, and operators across Southern California. Every project starts with a conversation.</p>
+      <div class="contact-detail" style="margin-top:40px;"><a href="mailto:oscar@oidoprojects.com">oscar@oidoprojects.com</a></div>
+      <div class="contact-detail" style="margin-top:12px;"><a href="tel:6197171234">(619) 717 1234</a></div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleForm(event)">
+        <div class="form-row">
+          <input type="text" class="f" placeholder="Your name" required/>
+          <input type="email" class="f" placeholder="Email address" required/>
+        </div>
+        <select class="f"><option value="" disabled selected>Project type</option><option>Hospitality — Front of House</option><option>Hospitality — Back of House</option><option>Bespoke / Sculptural</option><option>Other</option></select>
+        <textarea class="f" placeholder="Tell us about your project..."></textarea>
+        <button type="submit" class="f-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#hero" class="foot-logo">
+    <svg viewBox="0 0 696.2 240.5" aria-label="Oído Projects"><use href="#oido-logo" fill="#ffffff"/></svg>
+  </a>
+  <div class="foot-links">
+    <a href="#work">Work</a>
+    <a href="https://qrco.de/bgUBbI" target="_blank">Portfolio</a>
+    <a href="https://alustforms.com" target="_blank">Alust</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <span class="foot-copy">© 2026 Oído Projects</span>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const galleries={
+  'p01':[{src:'Captura%20de%20pantalla%202026-01-27%20125810.png',cap:'Center Console — Japanese Restaurant, 2025'},{src:'ChatGPT%20Image%20Jan%2027,%202026,%2002_03_58%20PM.png',cap:'Center Console — Stainless wall detail'},{src:'Captura%20de%20pantalla%202026-01-27%20130009.png',cap:'Center Console — Kitchen stainless panels'},{src:'Captura%20de%20pantalla%202026-01-27%20130105.png',cap:'Center Console — Dining room atmosphere'}],
+  'p02':[{src:'OK%20be973b4f-c41a-476b-a7c2-f8ba6f3f5261.JPG',cap:'Bar Service Unit — High-Fi Whiskey Bar, 2026'},{src:'OK%2073e59b83-3c50-4531-83bd-aa713f92e521.JPG',cap:'Bar Service Unit — Speaker integration detail'},{src:'OK%2018%20IG%20ROOM29.PNG',cap:'Bar Service Unit — Shelving detail'},{src:'WhatsApp%20Ima57257ge%202026-04-22%20at%2011.46.37%20AM.jpeg',cap:'Bar Service Unit — Counter detail'}],
+  'p03':[{src:'project03_fixed_v3.jpg',cap:'Back of House System — Restaurant, 2024'}],
+  'p04':[{src:'d7596f43-7c55-48c9-b402-19e9f6f79ce2.png',cap:'Bar Cabinet — Restaurant, 2025'},{src:'Captura%20de%20pantalla%202026-01-27%20123036.png',cap:'Bar Cabinet — Atmosphere'}],
+  'p05':[{src:'BUENA%20IMG_5515.jpeg',cap:'DJ Booth — Wine Bar, 2026'}],
+};
+let currentGallery=[],currentIdx=0;
+function openLightbox(k,i){currentGallery=galleries[k];currentIdx=i;showSlide();document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function showSlide(){const s=currentGallery[currentIdx];document.getElementById('lightboxImg').src=s.src;document.getElementById('lightboxCaption').textContent=s.cap;document.getElementById('lightboxCounter').textContent=(currentIdx+1)+' / '+currentGallery.length;}
+function lightboxNav(d){currentIdx=(currentIdx+d+currentGallery.length)%currentGallery.length;showSlide();}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='ArrowRight')lightboxNav(1);});
+function handleForm(e){e.preventDefault();const btn=e.target.querySelector('.f-submit');btn.textContent='Message Sent ✓';btn.style.background='#555';btn.style.color='#fff';setTimeout(()=>{btn.textContent='Send Message';btn.style.background='';btn.style.color='';e.target.reset();},3000);}
+</script>
+
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+  <div class="lightbox-main">
+    <button class="lightbox-prev" onclick="lightboxNav(-1)">←</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt=""/>
+    <button class="lightbox-next" onclick="lightboxNav(1)">→</button>
+  </div>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+</body>
+</html>
